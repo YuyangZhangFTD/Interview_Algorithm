@@ -1,11 +1,11 @@
 # 面试算法题总结
-1. Max Gap 最大间隔 1_MaxGap.py
+- 1. Max Gap 最大间隔 1_MaxGap.py
 
 问题描述：给定n个无序实数x_1,x_2,...,x_n，求这n个数在实轴上相邻2个数之间最大差值，设计一个线性时间的解法。
 
 解法分析：鸽舍原理，将其分平均为n-1段，必有一段是空的，对每一段进行线性扫描，即可求得最大间隔。
 
-2. Integer Dividing 整数划分 2_IntegerDividing.py
+- 2. Integer Dividing 整数划分 2_IntegerDividing.py
 
 问题描述：将正整数n表示为一系列正整数之和，n=n_1+n_2+...+n_k，其中n_1>=n_2>=...>=n_k，正整数n的不同划分个数称为正整数n的划分数，记为p(n)。
 

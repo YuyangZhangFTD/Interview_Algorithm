@@ -19,5 +19,14 @@
 
 (3) q(n,n)=q(n,n-1)+1.
 
-(4) q(n,m)=q(n,m-1)+q(n-m,m),n>m>1.
+(4) q(n,m)=q(n,m-1)+q(n-m,m),n>m>1
+
+3. Sort 排序 3_Sort.py
+
+
+
+
+
+
+
 

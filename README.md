@@ -21,13 +21,13 @@
 
 (4) q(n,m)=q(n,m-1)+q(n-m,m),n>m>1
 
-3. Sort 排序 
+- 3. Sort 排序 
 [3_Sort.py](https://github.com/YuyangZhangFTD/Interview_Algorithm/blob/master/3_Sort.py)
 常见排序算法总结
 
 
 
-4. Count and Say 计数并读数 
+- 4. Count and Say 计数并读数 
 [4_CountAndSay.py](https://github.com/YuyangZhangFTD/Interview_Algorithm/blob/master/4_CountAndSay.py)
 
 问题描述：给定一个自然数n写出第n个序列的数。

@@ -70,7 +70,8 @@ def shell_sort(para_list):
 		dk = int(dk/2)
 shell_sort(copy.copy(n_list))
 # ====================================  end  ================================
-	
+
+
 # ============================  simple selection sort  ======================
 @fn_timer
 def simple_selection_sort_with_BIF(para_list):	# with build-in function: min()
@@ -95,6 +96,7 @@ simple_selection_sort_with_BIF(copy.copy(n_list))
 simple_selection_sort(copy.copy(n_list))
 # ====================================  end  ================================
 
+
 # ===========================  binary selection sort ========================
 def get_max_min(para_list):
 	max_index = 0
@@ -118,17 +120,85 @@ def binary_selection_sort(para_list):
 binary_selection_sort(copy.copy(n_list))
 # ====================================  end  ================================
 
+
 # ================================  heap sort  ==============================
 # TODO
 # ====================================  end  ================================
 
+
 # ================================  bubble sort  ============================
-# TODO
+@fn_timer
+def bubble_sort(para_list):
+	for i in range(len(para_list)):
+		for j in range(len(para_list)-i-1):
+			if para_list[j] > para_list[j+1]:
+				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
+bubble_sort(copy.copy(n_list))
 # ====================================  end  ================================
+
+
+# ============================  improrved bubble sort  ======================
+@fn_timer
+def bubble_sort_with_flag(para_list):
+	for i in range(len(para_list)):
+		flag = 0
+		for j in range(len(para_list)-i-1):
+			if para_list[j] > para_list[j+1]:
+				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
+				flag = 1 		# exchanged
+bubble_sort_with_flag(copy.copy(n_list))
+
+
+@fn_timer
+def bubble_sort_with_pos(para_list):
+	i = len(para_list)-1
+	while i > 0 :
+		pos = 0
+		for j in range(i):
+			if para_list[j] > para_list[j+1]:	
+				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
+				pos = j			# record the last exchange postion
+		i = pos
+bubble_sort_with_pos(copy.copy(n_list))
+
+
+@fn_timer
+def bubble_sort_binary(para_list):
+	for i in range(len(para_list)):
+		for j in range(len(para_list)-i-1):
+			if para_list[j] > para_list[j+1]:
+				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
+		for j in range(len(para_list)-i-2)[::-1]:
+			if para_list[j] >  para_list[j+1]:
+				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
+bubble_sort_binary(copy.copy(n_list))
+# ====================================  end  ================================
+
 
 # ================================  quick sort  =============================
-# TODO
+def partition(para_list, para_low, para_high):
+	key = para_list[para_low]
+	while para_low < para_high:
+		while para_low < para_high and para_list[para_high] >= key:
+			para_high -= 1
+		para_list[para_low], para_list[para_high] = para_list[para_high], para_list[para_low]
+		while para_low < para_high and para_list[para_low] <= key:
+			para_low += 1
+		para_list[para_low], para_list[para_high] = para_list[para_high], para_list[para_low]
+	return para_low
+def quick_sort_index(para_list, para_low, para_high):
+	if para_low < para_high:
+		index = partition(para_list, para_low, para_high)
+		quick_sort_index(para_list, para_low, index-1)
+		quick_sort_index(para_list, index+1, para_high)
+@fn_timer
+def quick_sort(para_list):
+	quick_sort_index(para_list, 0, len(para_list)-1)
+
+quick_sort(copy.copy(n_list))
 # ====================================  end  ================================
 
 
-
+# ================================  merge sort  =============================
+# TODO
+# ====================================  end  ================================

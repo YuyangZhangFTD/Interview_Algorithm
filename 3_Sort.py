@@ -30,6 +30,7 @@ n_list = [random.randint(1,20000) for __ in range(10000)]
 @fn_timer
 def build_in_sort(para_list):
 	para_list.sort()
+
 build_in_sort(copy.copy(n_list))
 # ===================================  end  ==================================
 
@@ -46,6 +47,7 @@ def straight_insertion_sort(para_list):
 					i -= 1
 				para_list[j] = key
 				break
+
 straight_insertion_sort(copy.copy(n_list))
 # =====================================  end  ================================
 
@@ -68,6 +70,7 @@ def shell_sort(para_list):
 	while dk >= 1: 
 		shell_insertion_sort(para_list, dk)
 		dk = int(dk/2)
+
 shell_sort(copy.copy(n_list))
 # ====================================  end  ================================
 
@@ -92,6 +95,7 @@ def simple_selection_sort(para_list):		# min() by myself
 		min_index = get_min(para_list[i:])+i
 		if para_list[i-1] > para_list[min_index]:
 			para_list[i-1], para_list[min_index] = para_list[min_index], para_list[i-1]
+
 simple_selection_sort_with_BIF(copy.copy(n_list))
 simple_selection_sort(copy.copy(n_list))
 # ====================================  end  ================================
@@ -117,12 +121,8 @@ def binary_selection_sort(para_list):
 			para_list[i-1], para_list[min_index] = para_list[min_index], para_list[i-1]
 		if para_list[-i] < para_list[max_index]:
 			para_list[-i], para_list[max_index] = para_list[max_index], para_list[-i]
+
 binary_selection_sort(copy.copy(n_list))
-# ====================================  end  ================================
-
-
-# ================================  heap sort  ==============================
-# TODO
 # ====================================  end  ================================
 
 
@@ -133,6 +133,7 @@ def bubble_sort(para_list):
 		for j in range(len(para_list)-i-1):
 			if para_list[j] > para_list[j+1]:
 				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
+
 bubble_sort(copy.copy(n_list))
 # ====================================  end  ================================
 
@@ -146,6 +147,7 @@ def bubble_sort_with_flag(para_list):
 			if para_list[j] > para_list[j+1]:
 				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
 				flag = 1 		# exchanged
+
 bubble_sort_with_flag(copy.copy(n_list))
 
 
@@ -159,6 +161,7 @@ def bubble_sort_with_pos(para_list):
 				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
 				pos = j			# record the last exchange postion
 		i = pos
+
 bubble_sort_with_pos(copy.copy(n_list))
 
 
@@ -171,6 +174,7 @@ def bubble_sort_binary(para_list):
 		for j in range(len(para_list)-i-2)[::-1]:
 			if para_list[j] >  para_list[j+1]:
 				para_list[j], para_list[j+1] = para_list[j+1], para_list[j]
+
 bubble_sort_binary(copy.copy(n_list))
 # ====================================  end  ================================
 
@@ -199,6 +203,56 @@ quick_sort(copy.copy(n_list))
 # ====================================  end  ================================
 
 
+# ================================  heap sort  ==============================
+def adjust_heap(para_list, para_i, para_size):
+	lchild = 2*para_i+1
+	rchild = 2*para_i+2
+	max_n = para_i
+	if para_i < int(para_size/2):
+		if lchild < para_size and para_list[lchild] > para_list[max_n]:
+			max_n = lchild
+		if rchild < para_size and para_list[rchild] > para_list[max_n]:
+			max_n = rchild
+		if max_n != para_i:
+			para_list[max_n],para_list[para_i] = para_list[para_i], para_list[max_n]
+			adjust_heap(para_list, max_n, para_size)
+def build_heap(para_list, para_size):
+	for i in range(int(para_size/2))[::-1]:
+		adjust_heap(para_list, i, para_size)
+@fn_timer
+def heap_sort(para_list):
+	size = len(para_list)
+	build_heap(para_list, size)
+	for i in range(0, size)[::-1]:
+		para_list[0], para_list[i] = para_list[i], para_list[0]
+		adjust_heap(para_list, 0, i)
+
+heap_sort(copy.copy(n_list))
+# ====================================  end  ================================
+
+
 # ================================  merge sort  =============================
-# TODO
+def merge(para_list1, para_list2):
+	i,j = 0,0
+	result = []
+	while i<len(para_list1) and j<len(para_list2):
+		if para_list1[i] <= para_list2[j]:
+			result.append(para_list1[i])
+			i += 1
+		else:
+			result.append(para_list2[j])
+			j += 1	
+	return result + para_list1[i:] + para_list2[j:]
+def merge_sort_recursion(para_list):
+	if len(para_list) <= 1:
+		return para_list
+	num = int(len(para_list)/2)
+	list1 = merge_sort_recursion(para_list[:num])
+	list2 = merge_sort_recursion(para_list[num:])
+	return merge(list1, list2)
+@fn_timer
+def merge_sort(para_list):
+	para_list = merge_sort_recursion(para_list)
+
+merge_sort(copy.copy(n_list))
 # ====================================  end  ================================
